@@ -43,7 +43,7 @@ class AddSub extends JFrame {
         Container c=getContentPane();
         c.setLayout(null);
 
-        ImageIcon userIcon = new ImageIcon("C:\\Users\\Madhura Walawalkar\\Downloads\\1-personal-center-20x20-48.png");
+        ImageIcon userIcon = new ImageIcon("imgpath");
         Image scaledImage = userIcon.getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH);
         JLabel userLogo = new JLabel(new ImageIcon(scaledImage));
         userLogo.setBounds(50, 150, 48, 48); // Adjust as needed
@@ -60,7 +60,7 @@ class AddSub extends JFrame {
                 a->{
                     String url="jdbc:oracle:thin:@localhost:1521:orcl";
                     int userId=0;
-                    try(Connection con= DriverManager.getConnection(url,"C##MAJAKAAM","majajava123")){
+                    try(Connection con= DriverManager.getConnection(url,"db_username","db_password")){
                         String sql="select user_id from users_of_abhyas where uname= ?";
                         try (PreparedStatement pst=con.prepareStatement(sql)){
                             pst.setString(1, username);
@@ -113,3 +113,4 @@ class AddSub extends JFrame {
         new AddSub("Madhura");
     }
 }
+

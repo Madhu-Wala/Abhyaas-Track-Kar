@@ -57,7 +57,7 @@ class Dashboard extends JFrame {
 //find and write stream
         String stream="";
         String url="jdbc:oracle:thin:@localhost:1521:orcl";
-        try(Connection con= DriverManager.getConnection(url,"C##MAJAKAAM","majajava123")){
+        try(Connection con= DriverManager.getConnection(url,"db_username","db_password")){
             String sql="SELECT stream FROM users_of_abhyas WHERE uname= ?";
             try(PreparedStatement pst= con.prepareStatement(sql)){
                 pst.setString(1, username);
@@ -136,7 +136,7 @@ class Dashboard extends JFrame {
         viewWeekly.setBounds(500, 615, 250, 40);
         todayScroll.setBounds(50, 670, 680, 200);
 
-        ImageIcon userIcon = new ImageIcon("C:\\Users\\Madhura Walawalkar\\Downloads\\1-personal-center-20x20-48.png");
+        ImageIcon userIcon = new ImageIcon("imgpath");
         Image scaledImage = userIcon.getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH);
         JLabel userLogo = new JLabel(new ImageIcon(scaledImage));
         userLogo.setBounds(50, 150, 48, 48); // Adjust as needed
@@ -163,7 +163,7 @@ class Dashboard extends JFrame {
         setContentPane(mainScroll);
 
         int userId = 0; // Replace with actual user ID if you can get it dynamically
-        try (Connection con=DriverManager.getConnection(url,"C##MAJAKAAM", "majajava123")){
+        try (Connection con=DriverManager.getConnection(url,"db_username","db_password")){
 
             //find user id
             String sql="select user_id from users_of_abhyas where uname= ?";
@@ -186,22 +186,15 @@ class Dashboard extends JFrame {
                 Map<String, Integer> subSessCount=new HashMap<>();
 
                 while (rs.next()) {
-                    //subject utha lo
                     String subject = rs.getString("subname");
-                    //tampstamps utha lo
-                    //Timestamp ek class hai jo sql ka diya hua timestamp catch karta hai
                     Timestamp startTime=rs.getTimestamp("start_time");
                     Timestamp endTime=rs.getTimestamp("end_time");
 
-                    //hashmap me bhar do
                     if(startTime!=null && endTime!=null){
-                        //translate sql to java
                         LocalDateTime startLD =startTime.toLocalDateTime();
                         LocalDateTime endLD=endTime.toLocalDateTime();
-                        //Duration.between hume time ka difference dega
                         Duration sessDura=Duration.between(startLD, endLD);
 
-                        //hashmap bhar do
                         subDuration.put(subject, subDuration.getOrDefault(subject, Duration.ZERO).plus(sessDura));
                         subSessCount.put(subject, subSessCount.getOrDefault(subject, 0)+1);
 
@@ -213,11 +206,9 @@ class Dashboard extends JFrame {
 
                 }
                 for(String subject:subDuration.keySet()){
-                    //hashmap ka key set traverse kar
-                    Duration dur=subDuration.get(subject);  //duration utha
-                    int totalsessions=subSessCount.getOrDefault(subject,0);  //count utha
+                    Duration dur=subDuration.get(subject);  
+                    int totalsessions=subSessCount.getOrDefault(subject,0);  
 
-                    //Duration se number me convert kar
                     long totalSeconds = dur.getSeconds();
                     long totalHr = totalSeconds / 3600;
                     long totalMin = (totalSeconds % 3600) / 60;
@@ -242,22 +233,19 @@ class Dashboard extends JFrame {
                 Map<String, Integer> subSessCount=new HashMap<>();
 
                 while (rs.next()) {
-                    //subject utha lo
+                   
                     String subject = rs.getString("subname");
-                    //tampstamps utha lo
-                    //Timestamp ek class hai jo sql ka diya hua timestamp catch karta hai
                     Timestamp startTime=rs.getTimestamp("start_time");
                     Timestamp endTime=rs.getTimestamp("end_time");
 
-                    //hashmap me bhar do
+                   
                     if(startTime!=null && endTime!=null){
                         //translate sql to java
                         LocalDateTime startLD =startTime.toLocalDateTime();
                         LocalDateTime endLD=endTime.toLocalDateTime();
-                        //Duration.between hume time ka difference dega
+                      
                         Duration sessDura=Duration.between(startLD, endLD);
 
-                        //hashmap bhar do
                         subDuration.put(subject, subDuration.getOrDefault(subject, Duration.ZERO).plus(sessDura));
                         subSessCount.put(subject, subSessCount.getOrDefault(subject, 0)+1);
 
@@ -265,11 +253,10 @@ class Dashboard extends JFrame {
 
                 }
                 for(String subject:subDuration.keySet()){
-                    //hashmap ka key set traverse kar
-                    Duration dur=subDuration.get(subject);  //duration utha
-                    int totalsessions=subSessCount.getOrDefault(subject,0);  //count utha
+                   
+                    Duration dur=subDuration.get(subject);  
+                    int totalsessions=subSessCount.getOrDefault(subject,0); 
 
-                    //Duration se number me convert kar
 
                     long totalSeconds = dur.getSeconds();
                     long totalHr = totalSeconds / 3600;
@@ -282,8 +269,6 @@ class Dashboard extends JFrame {
                 }
 
             }
-
-
 
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -342,3 +327,4 @@ class Dashboard extends JFrame {
         new Dashboard("sunil02");
     }
 }
+

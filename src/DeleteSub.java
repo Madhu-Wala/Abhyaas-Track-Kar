@@ -109,8 +109,7 @@ class DeleteSub extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("Delete Subject");
     }
-    public static void main(String[] args) {
-        new DeleteSub("Madhura");
-    }
+    
 }
+
 

@@ -323,8 +323,6 @@ class Dashboard extends JFrame {
         setTitle("Dashboard");
     }
 
-    public static void main(String[] args) {
-        new Dashboard("sunil02");
-    }
 }
+
 

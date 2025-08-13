@@ -14,7 +14,6 @@ class Login extends JFrame {
         JLabel l3=new JLabel("Enter username: ");
         JTextField t1 = new JTextField(10);
         JLabel l4=new JLabel("Enter Password: ");
-//        JTextField t2 = new JTextField(10);
         JPasswordField t2=new JPasswordField(10);
         t2.setEchoChar('•');
 
@@ -55,10 +54,10 @@ class Login extends JFrame {
                 g2d.fillRect(0, 0, width, height);
             }
         };
-        gradientPanel.setLayout(null); // or whatever layout you want
+        gradientPanel.setLayout(null); 
 
-        setContentPane(gradientPanel);  // Replaces getContentPane()
-        Container c = getContentPane();  // Now c is your gradient panel
+        setContentPane(gradientPanel);  
+        Container c = getContentPane();
 
         c.setLayout(null);
 
@@ -95,7 +94,7 @@ class Login extends JFrame {
         b1.addActionListener(
                 a->{
                     String url="jdbc:oracle:thin:@localhost:1521:orcl";
-                    try(Connection con= DriverManager.getConnection(url,"C##MAJAKAAM","majajava123")){
+                    try(Connection con= DriverManager.getConnection(url,"db_username","db_password")){
                         String sql="select * from users_of_abhyas where uname=? and password=?";
                         try(PreparedStatement pst=con.prepareStatement(sql)){
                             pst.setString(1, t1.getText());
@@ -136,3 +135,4 @@ class Login extends JFrame {
         new Login();
     }
 }
+

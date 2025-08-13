@@ -31,8 +31,6 @@ class Session extends JFrame {
         timerLabel.setFont(new Font("Consolas", Font.BOLD, 28));
         timerLabel.setBounds(300, 180, 200, 50);
 
-
-
         l1.setFont(f);
         l2.setFont(f2);
         l3.setFont(f2);
@@ -142,7 +140,6 @@ class Session extends JFrame {
                             }
                         }
 
-                        //userid and subid mil gaya
                         String sessionStart = "INSERT INTO sessions (user_id, sub_id, start_time) VALUES (?, ?, ?)";
                         try (PreparedStatement pst = con.prepareStatement(sessionStart)) {
                             pst.setInt(1, userId);
@@ -154,7 +151,7 @@ class Session extends JFrame {
 
                         }
                         //ui timer part
-                        secondsPassed=0;//har bar reset
+                        secondsPassed=0;// reset
                         timerLabel.setText("00:00:00");
 
                         timer=new Timer(1000, event->{
@@ -212,8 +209,6 @@ class Session extends JFrame {
                                 return;
                             }subId = rs.getInt("sub_id");
                         }
-
-                        //userid and subid mil gaya
                         String sessionEnd = "UPDATE sessions SET end_time = ? WHERE user_id = ? AND sub_id = ? AND end_time IS NULL";
                         try (PreparedStatement pst = con.prepareStatement(sessionEnd)) {
                             sessionEndTime = LocalDateTime.now().withNano(0);
@@ -234,8 +229,6 @@ class Session extends JFrame {
                                 String realDuration = String.format("%02d:%02d:%02d", hours, minutes, seconds);
                                 JOptionPane.showMessageDialog(null, "Session ended! Duration: " + realDuration);
                             }
-
-
                             //reset
                             timerLabel.setText("00:00:00");
                             t1.setEnabled(true);
@@ -263,8 +256,7 @@ class Session extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("Session Room");
     }
-    public static void main(String[] args) {
-        new Session("Madhura");
-    }
+    
 }
+
 

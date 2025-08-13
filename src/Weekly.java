@@ -94,7 +94,7 @@ class Weekly extends JFrame {
         back.setBounds(50, 920, 150, 40);
 
 
-        ImageIcon userIcon = new ImageIcon("C:\\Users\\Madhura Walawalkar\\Downloads\\1-personal-center-20x20-48.png");
+        ImageIcon userIcon = new ImageIcon("imgpath");
         Image scaledImage = userIcon.getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH);
         JLabel userLogo = new JLabel(new ImageIcon(scaledImage));
         userLogo.setBounds(60, 130, 32, 32);
@@ -116,7 +116,7 @@ class Weekly extends JFrame {
         // DB logic
         String url = "jdbc:oracle:thin:@localhost:1521:orcl";
         int userId = 0;
-        try (Connection con = DriverManager.getConnection(url, "C##MAJAKAAM", "majajava123")) {
+        try (Connection con = DriverManager.getConnection(url,"db_username","db_password")) {
 
             String sql = "SELECT user_id FROM users_of_abhyas WHERE uname = ?";
             try (PreparedStatement pst = con.prepareStatement(sql)) {
@@ -127,7 +127,6 @@ class Weekly extends JFrame {
                 }
             }
 
-            // Updated query
             String weeklySql = "SELECT s.subname, sess.start_time, sess.end_time " +
                     "FROM subjects s " +
                     "LEFT JOIN sessions sess ON s.sub_id = sess.sub_id " +
@@ -161,11 +160,10 @@ class Weekly extends JFrame {
 
                 }
                 for(String subject:subDuration.keySet()){
-                    ///hashmap ka key set traverse kar
-                    Duration dur=subDuration.get(subject);  //duration utha
-                    int totalsessions=subSessCount.getOrDefault(subject,0);  //count utha
+                 
+                    Duration dur=subDuration.get(subject);  
+                    int totalsessions=subSessCount.getOrDefault(subject,0);  
 
-                    //Duration se number me convert kar
                     long totalMin=dur.toMinutes();
                     long remianingSec=dur.minusMinutes(totalMin).getSeconds();
 
@@ -214,7 +212,6 @@ class Weekly extends JFrame {
         chartPanel.setBounds(50, 500, 550, 400); // adjust size and position
         panel.add(chartPanel);
 
-
         // Back button logic
         back.addActionListener(a -> {
             new Dashboard(username);
@@ -228,7 +225,6 @@ class Weekly extends JFrame {
         setTitle("Weekly Report");
     }
 
-    public static void main(String[] args) {
-        new Weekly("Madhura");
-    }
+
 }
+

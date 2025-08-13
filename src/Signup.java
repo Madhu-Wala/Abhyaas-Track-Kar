@@ -61,9 +61,9 @@ class Signup extends JFrame {
                 g2d.fillRect(0, 0, width, height);
             }
         };
-        gradientPanel.setLayout(null); // or whatever layout you want
+        gradientPanel.setLayout(null); 
 
-        setContentPane(gradientPanel);  // Replaces getContentPane()
+        setContentPane(gradientPanel);  
 
         Container c = getContentPane();
         c.setLayout(null);
@@ -104,7 +104,7 @@ class Signup extends JFrame {
 
         b1.addActionListener(a -> {
             String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-            try (Connection con = DriverManager.getConnection(url, "C##MAJAKAAM", "majajava123")) {
+            try (Connection con = DriverManager.getConnection(url,"db_username","db_password")) {
                 String sql = "INSERT INTO users_of_abhyas (uname, uemail, stream, password) VALUES (?, ?, ?, ?)";
 
 
@@ -172,3 +172,4 @@ class Signup extends JFrame {
         new Signup();
     }
 }
+
